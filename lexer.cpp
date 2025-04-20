@@ -99,10 +99,11 @@ std::unique_ptr<Token> Lexer::scanToken() {
     if (isDigit(c)) return number();
     
     switch (c) {
-        case '(': return std::unique_ptr<Token>(new Token(TokenType::LEFT_PAREN, "(", line, startColumn));
+       
         case ')': return std::unique_ptr<Token>(new Token(TokenType::RIGHT_PAREN, ")", line, startColumn));
         case '{': return std::unique_ptr<Token>(new Token(TokenType::LEFT_BRACE, "{", line, startColumn));
         case '}': return std::unique_ptr<Token>(new Token(TokenType::RIGHT_BRACE, "}", line, startColumn));
+         case '(': return std::unique_ptr<Token>(new Token(TokenType::LEFT_PAREN, "(", line, startColumn));
         case '[': return std::unique_ptr<Token>(new Token(TokenType::LEFT_BRACKET, "[", line, startColumn));
         case ']': return std::unique_ptr<Token>(new Token(TokenType::RIGHT_BRACKET, "]", line, startColumn));
         case ';': return std::unique_ptr<Token>(new Token(TokenType::SEMICOLON, ";", line, startColumn));
