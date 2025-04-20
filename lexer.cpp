@@ -63,6 +63,7 @@ std::vector<std::unique_ptr<Token>> Lexer::tokenize() {
         }
         tokens.push_back(std::move(token));
     }
+    
     std::cout << "tokenize() completed with " << tokens.size() << " tokens\n" << std::flush;
     return tokens;
 }
@@ -95,11 +96,10 @@ std::unique_ptr<Token> Lexer::scanToken() {
     int startColumn = column - 1;
     std::cout << "scanToken() char='" << c << "' at line=" << line << ", column=" << startColumn << "\n" << std::flush;
     
-    if (isAlpha(c)) return identifier();
     if (isDigit(c)) return number();
+    if (isAlpha(c)) return identifier();
     
-    switch (c) {
-       
+    switch (c) {   
         case ')': return std::unique_ptr<Token>(new Token(TokenType::RIGHT_PAREN, ")", line, startColumn));
         case '{': return std::unique_ptr<Token>(new Token(TokenType::LEFT_BRACE, "{", line, startColumn));
         case '}': return std::unique_ptr<Token>(new Token(TokenType::RIGHT_BRACE, "}", line, startColumn));
@@ -160,7 +160,6 @@ std::unique_ptr<Token> Lexer::scanToken() {
         case '"': return string();
         case '\'': return character();
     }
-    
     return errorToken(std::string("Unexpected character: ") + c);
 }
 
@@ -173,6 +172,7 @@ std::unique_ptr<Token> Lexer::identifier() {
     if (it != keywords.end()) return std::unique_ptr<Token>(new Token(it->second, text, line, column - text.length()));
     return std::unique_ptr<Token>(new Token(TokenType::IDENTIFIER, text, line, column - text.length()));
 }
+
 
 std::unique_ptr<Token> Lexer::number() {
     std::cout << "number() at current=" << current << "\n" << std::flush;
