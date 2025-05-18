@@ -1,5 +1,6 @@
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "JavaCodeGenerator.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -37,6 +38,21 @@ int main(int argc, char* argv[]) {
         auto ast = parser.parse();
         std::cout << "Parsing successful! AST:\n";
         std::cout << ast->toString() << "\n";
+        // Generate Java code from AST
+        JavaCodeGenerator generator;
+        std::string javaCode = generator.generate(ast.get());
+        std::cout << "\nGenerated Java code:\n" << javaCode << std::endl;
+        // Optionally write to output file if provided
+        if (argc >= 3) {
+            std::ofstream out(argv[2]);
+            if (out.is_open()) {
+                out << javaCode;
+                out.close();
+                std::cout << "Java code written to " << argv[2] << std::endl;
+            } else {
+                std::cerr << "Error: Could not open output file '" << argv[2] << "'\n";
+            }
+        }
     } catch (const std::exception& e) {
         std::cerr << "Parser error: " << e.what() << "\n";
         return 1;
