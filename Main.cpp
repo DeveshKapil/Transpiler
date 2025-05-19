@@ -18,11 +18,12 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string inputfile = argv[1];
+    std::string inputfile = argv[2];
     std::stringstream ss(inputfile);
     std::string token;
     std::getline(ss, token, '.');
     std::string outputfile = token;
+    std::cout << "File Name: " << outputfile << std::endl;
 
 
     std::stringstream buffer;
