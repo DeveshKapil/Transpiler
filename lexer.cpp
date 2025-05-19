@@ -237,16 +237,6 @@ std::unique_ptr<Token> Lexer::character() {
     return token;
 }
 
-std::unique_ptr<Token> Lexer::makeToken(TokenType type) const {
-    return makeToken(type, currentLexeme());
-}
-
-std::unique_ptr<Token> Lexer::makeToken(TokenType type, const std::string& text) const {
-    std::cout << "makeToken() type=" << static_cast<int>(type) << ", text='" << text << "'\n" << std::flush;
-    int tokenColumn = column - text.length();
-    if (tokenColumn < 1) tokenColumn = 1;
-    return std::unique_ptr<Token>(new Token(type, text, line, tokenColumn));
-}
 
 std::unique_ptr<Token> Lexer::errorToken(const std::string& message) {
     std::cout << "errorToken(): " << message << "\n" << std::flush;
