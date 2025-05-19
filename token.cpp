@@ -49,7 +49,9 @@ namespace {
         {TokenType::LEFT_BRACKET, "LEFT_BRACKET"}, {TokenType::RIGHT_BRACKET, "RIGHT_BRACKET"},
         {TokenType::SEMICOLON, "SEMICOLON"}, {TokenType::COMMA, "COMMA"},
         {TokenType::DOT, "DOT"}, {TokenType::COLON, "COLON"},
-        {TokenType::SCOPE, "SCOPE"}
+        {TokenType::SCOPE, "SCOPE"},
+        {TokenType::HASH, "HASH"}
+
     };
     
     const char* getTokenTypeName(TokenType type) {

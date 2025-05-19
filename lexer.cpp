@@ -32,7 +32,8 @@ const std::unordered_map<std::string, TokenType> Lexer::operators = {
     {"--", TokenType::MINUS_MINUS}, {"->", TokenType::ARROW}, {"(", TokenType::LEFT_PAREN},
     {")", TokenType::RIGHT_PAREN}, {"{", TokenType::LEFT_BRACE}, {"}", TokenType::RIGHT_BRACE},
     {"[", TokenType::LEFT_BRACKET}, {"]", TokenType::RIGHT_BRACKET}, {";", TokenType::SEMICOLON},
-    {",", TokenType::COMMA}, {".", TokenType::DOT}, {":", TokenType::COLON}, {"::", TokenType::SCOPE}
+    {",", TokenType::COMMA}, {".", TokenType::DOT}, {":", TokenType::COLON}, {"::", TokenType::SCOPE},
+    {"#", TokenType::HASH}
 };
 
 Lexer::Lexer(std::string source) : source(std::move(source)) {}
