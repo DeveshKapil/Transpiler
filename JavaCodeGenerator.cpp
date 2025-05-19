@@ -1,10 +1,10 @@
 #include "JavaCodeGenerator.hpp"
 #include <sstream>
 
-std::string JavaCodeGenerator::generate(const ASTNode* node) const {
+std::string JavaCodeGenerator::generate(const ASTNode* node , const std::string outputfile) const {
     switch (node->type) {
         case ASTNodeType::FUNCTION_DECL:
-            return generateFunctionDecl(static_cast<const FunctionDecl*>(node));
+            return generateFunctionDecl(static_cast<const FunctionDecl*>(node) , outputfile);
         case ASTNodeType::VAR_DECL:
             return generateVarDecl(static_cast<const VarDecl*>(node));
         case ASTNodeType::IF_STMT:
@@ -22,10 +22,10 @@ std::string JavaCodeGenerator::generate(const ASTNode* node) const {
     }
 }
 
-std::string JavaCodeGenerator::generateFunctionDecl(const FunctionDecl* node) const {
+std::string JavaCodeGenerator::generateFunctionDecl(const FunctionDecl* node , const std::string outputfile) const {
     std::ostringstream oss;
     // For simplicity, wrap everything in a class called Main
-    oss << "public class Main {\n";
+    oss << "public class " << outputfile << " {\n";
     oss << "    public static " << node->returnType << " " << node->name << "() {\n";
     for (const auto& stmt : node->statements) {
         oss << "        " << generate(stmt.get()) << "\n";

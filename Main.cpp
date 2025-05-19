@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include<string>
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -16,6 +17,13 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Could not open source file '" << argv[1] << "'\n";
         return 1;
     }
+
+    std::string inputfile = argv[1];
+    std::stringstream ss(inputfile);
+    std::string token;
+    std::getline(ss, token, '.');
+    std::string outputfile = token;
+
 
     std::stringstream buffer;
     buffer << file.rdbuf();
@@ -40,7 +48,7 @@ int main(int argc, char* argv[]) {
         std::cout << ast->toString() << "\n";
         // Generate Java code from AST
         JavaCodeGenerator generator;
-        std::string javaCode = generator.generate(ast.get());
+        std::string javaCode = generator.generate(ast.get() , outputfile);
         std::cout << "\nGenerated Java code:\n" << javaCode << std::endl;
         // Optionally write to output file if provided
         if (argc >= 3) {
